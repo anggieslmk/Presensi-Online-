@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi XI TKJ 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .bg-tech-blue { background-color: #0f172a; }
+        .text-tech-blue { color: #0f172a; }
+        .border-tech-blue { border-color: #0f172a; }
+        .bg-mint { background-color: #10b981; }
+        .bg-mint-hover { background-color: #059669; }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans min-h-screen">
+
+    <header class="bg-tech-blue text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wide">XI TKJ 1 <span class="text-emerald-400">Presence</span></h1>
+            <nav>
+                <button onclick="switchTab('siswa')" id="btn-tab-siswa" class="px-4 py-2 rounded-md bg-emerald-500 text-white font-medium mr-2">Siswa</button>
+                <button onclick="aksesGuru()" id="btn-tab-guru" class="px-4 py-2 rounded-md text-slate-300 hover:text-white font-medium">Guru</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 max-w-4xl mt-6">
+        
+        <section id="tab-siswa" class="bg-white rounded-2xl shadow-xl p-6 border-t-8 border-slate-950">
+            <h2 class="text-2xl font-bold text-tech-blue mb-2">Isi Kehadiran Siswa</h2>
+            <p class="text-slate-500 mb-6 text-sm">Silakan pilih nama Anda dan isi status kehadiran hari ini dengan jujur.</p>
+
+            <form id="form-presensi" onsubmit="simpanPresensi(event)">
+                <div class="mb-5">
+                    <label class="block text-slate-700 font-semibold mb-2">Nama Lengkap</label>
+                    <select id="nama-siswa" required class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50">
+                        <option value="" disabled selected>-- Pilih Nama Anda --</option>
+                        <option value="Adittia Nur Cahya">Adittia Nur Cahya</option>
+                        <option value="Afrizal Prasetya">Afrizal Prasetya</option>
+                        <option value="Anita Sugih Asih">Anita Sugih Asih</option>
+                        <option value="Calista Yitriani">Calista Yitriani</option>
+                        <option value="Chika Nur Carolina">Chika Nur Carolina</option>
+                        <option value="Diaz Setiawan">Diaz Setiawan</option>
+                        <option value="Dinda">Dinda</option>
+                        <option value="Doni Dwi Candi Anan">Doni Dwi Candi Anan</option>
+                        <option value="Efril Syah Nagaring">Efril Syah Nagaring</option>
+                        <option value="Emillia Faizatuz Zahra">Emillia Faizatuz Zahra</option>
+                        <option value="Fadil Akmal Arasyid">Fadil Akmal Arasyid</option>
+                        <option value="Fajar Putra Pratama">Fajar Putra Pratama</option>
+                        <option value="Fani Amelia">Fani Amelia</option>
+                        <option value="Fani Sepfira Pangestika">Fani Sepfira Pangestika</option>
+                        <option value="Febri Dwi Faozan">Febri Dwi Faozan</option>
+                        <option value="Fiona Rahma Anindya">Fiona Rahma Anindya</option>
+                        <option value="Helena Feiza Valen">Helena Feiza Valen</option>
+                        <option value="Ismail Fauzan">Ismail Fauzan</option>
+                        <option value="Jeni Nur Azizah">Jeni Nur Azizah</option>
+                        <option value="Kelina Azalia">Kelina Azalia</option>
+                        <option value="Khela Saputri">Khela Saputri</option>
+                        <option value="Metta Aisiya">Metta Aisiya</option>
+                        <option value="Muhamad Faqih Nurrokhim">Muhamad Faqih Nurrokhim</option>
+                        <option value="Muhammad Izbat Ramadhan">Muhammad Izbat Ramadhan</option>
+                        <option value="Nizrina Hanin Aulia">Nizrina Hanin Aulia</option>
+                        <option value="Puji Sukma Astuti">Puji Sukma Astuti</option>
+                        <option value="Ridho Rel Fano">Ridho Rel Fano</option>
+                        <option value="Rizky Bagus Luthfiansyah">Rizky Bagus Luthfiansyah</option>
+                        <option value="Widya Larasati">Widya Larasati</option>
+                        <option value="Yanwar Reno Fajrian">Yanwar Reno Fajrian</option>
+                        <option value="Zauky Fitra">Zauky Fitra</option>
+                        <option value="Zulfitiana Anisa">Zulfitiana Anisa</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label class="block text-slate-700 font-semibold mb-2">Status Kehadiran</label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="flex flex-col items-center justify-center p-4 border border-slate-300 rounded-xl cursor-pointer hover:bg-emerald-50 transition peer-checked:border-emerald-500 has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500">
+                            <input type="radio" name="status" value="Hadir" required onclick="toggleUploadLabel('foto')" class="accent-emerald-600 w-5 h-5 mb-2">
+                            <span class="font-medium text-slate-700">Hadir</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-4 border border-slate-300 rounded-xl cursor-pointer hover:bg-emerald-50 transition has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500">
+                            <input type="radio" name="status" value="Izin" onclick="toggleUploadLabel('surat')" class="accent-emerald-600 w-5 h-5 mb-2">
+                            <span class="font-medium text-slate-700">Izin</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-4 border border-slate-300 rounded-xl cursor-pointer hover:bg-emerald-50 transition has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500">
+                            <input type="radio" name="status" value="Sakit" onclick="toggleUploadLabel('surat')" class="accent-emerald-600 w-5 h-5 mb-2">
+                            <span class="font-medium text-slate-700">Sakit</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label id="label-bukti" class="block text-slate-700 font-semibold mb-2">Unggah Bukti Kehadiran / Surat Izin</label>
+                    <input type="file" id="file-bukti" accept="image/*,.pdf" required class="w-full p-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-slate-950 file:text-white hover:file:bg-slate-800 cursor-pointer">
+                    <p class="text-xs text-slate-400 mt-1">Format: JPG, PNG, PDF. Maksimal 2MB.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-mint text-white p-3 rounded-lg font-bold text-lg hover:bg-mint-hover transition shadow-md cursor-pointer">Kirim Presensi</button>
+            </form>
+        </section>
+
+        <section id="tab-guru" class="bg-white rounded-2xl shadow-xl p-6 border-t-8 border-slate-950 hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-tech-blue">Rekap Presensi Siswa</h2>
+                    <p class="text-slate-500 text-sm">Halaman khusus guru untuk memantau kehadiran kelas XI TKJ 1.</p>
+                </div>
+                <button onclick="hapusSemuaData()" class="text-xs bg-red-100 text-red-600 px-3 py-2 rounded hover:bg-red-200 font-medium">Reset Data</button>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-lg border border-slate-200">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-950 text-white text-sm">
+                            <th class="p-4 font-semibold">Waktu</th>
+                            <th class="p-4 font-semibold">Nama Siswa</th>
+                            <th class="p-4 font-semibold">Status</th>
+                            <th class="p-4 font-semibold text-center">Bukti / Surat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-rekap-body" class="text-slate-700 text-sm divide-y divide-slate-200">
+                        </tbody>
+                </table>
+            </div>
+            <div id="pesan-kosong" class="text-center p-8 text-slate-400 italic hidden">Belum ada siswa yang mengisi presensi hari ini.</div>
+        </section>
+
+    </main>
+
+    <script>
+        // KATA SANDI AKSES GURU
+        const KATA_SANDI_GURU = "gurutkj1";
+
+        // Fungsi memeriksa kata sandi sebelum masuk halaman guru
+        function aksesGuru() {
+            const inputSandi = prompt("Masukkan kata sandi khusus guru untuk mengakses halaman ini:");
+            if (inputSandi === KATA_SANDI_GURU) {
+                switchTab('guru');
+            } else if (inputSandi !== null) {
+                alert("Kata sandi salah! Akses ditolak.");
+            }
+        }
+
+        // Fungsi pindah halaman (Tab)
+        function switchTab(tab) {
+            const tabSiswa = document.getElementById('tab-siswa');
+            const tabGuru = document.getElementById('tab-guru');
+            const btnSiswa = document.getElementById('btn-tab-siswa');
+            const btnGuru = document.getElementById('btn-tab-guru');
+
+            if (tab === 'siswa') {
+                tabSiswa.classList.remove('hidden');
+                tabGuru.classList.add('hidden');
+                btnSiswa.className = "px-4 py-2 rounded-md bg-emerald-500 text-white font-medium mr-2";
+                btnGuru.className = "px-4 py-2 rounded-md text-slate-300 hover:text-white font-medium";
+            } else {
+                tabSiswa.classList.add('hidden');
+                tabGuru.classList.remove('hidden');
+                btnSiswa.className = "px-4 py-2 rounded-md text-slate-300 hover:text-white font-medium mr-2";
+                btnGuru.className = "px-4 py-2 rounded-md bg-emerald-500 text-white font-medium";
+                tampilkanRekap();
+            }
+        }
+
+        // Fungsi mengubah teks label unggah berkas berdasarkan pilihan status
+        function toggleUploadLabel(tipe) {
+            const label = document.getElementById('label-bukti');
+            if (tipe === 'foto') {
+                label.innerText = "Unggah Bukti Swafoto / Kamera (Hadir)";
+            } else {
+                label.innerText = "Unggah Surat Keterangan / Surat Izin (Sakit/Izin)";
+            }
+        }
+
+        // Fungsi menyimpan data ke LocalStorage browser beserta file (Base64)
+        function simpanPresensi(event) {
+            event.preventDefault();
+            
+            const nama = document.getElementById('nama-siswa').value;
+            const status = document.querySelector('input[name="status"]:checked').value;
+            const fileInput = document.getElementById('file-bukti').files[0];
+            
+            if (!fileInput) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fileBase64 = e.target.result;
+                const waktu = new Date().toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: 'short' });
+
+                const dataBaru = { waktu, nama, status, fileData: fileBase64, fileName: fileInput.name };
+                
+                let dataPresensi = JSON.parse(localStorage.getItem('presensi_tkj')) || [];
+                dataPresensi.push(dataBaru);
+                
+                localStorage.setItem('presensi_tkj', JSON.stringify(dataPresensi));
+                
+                alert('Presensi berhasil dikirim!');
+                document.getElementById('form-presensi').reset();
+                toggleUploadLabel('foto');
+            };
+            
+            reader.readAsDataURL(fileInput);
+        }
+
+        // Fungsi memuat dan menampilkan data di tabel guru
+        function tampilkanRekap() {
+            const tbody = document.getElementById('tabel-rekap-body');
+            const pesanKosong = document.getElementById('pesan-kosong');
+            const dataPresensi = JSON.parse(localStorage.getItem('presensi_tkj')) || [];
+
+            tbody.innerHTML = '';
+
+            if (dataPresensi.length === 0) {
+                pesanKosong.classList.remove('hidden');
+                return;
+            } else {
+                pesanKosong.classList.add('hidden');
+            }
+
+            // Tampilkan data dari yang terbaru di atas
+            [...dataPresensi].reverse().forEach(data => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition";
+
+                let badgeColor = "bg-emerald-100 text-emerald-800";
+                if (data.status === 'Izin') badgeColor = "bg-amber-100 text-amber-800";
+                if (data.status === 'Sakit') badgeColor = "bg-red-100 text-red-800";
+
+                tr.innerHTML = `
+                    <td class="p-4 text-slate-500">${data.waktu}</td>
+                    <td class="p-4 font-semibold text-slate-800">${data.nama}</td>
+                    <td class="p-4"><span class="px-2 py-1 rounded-full text-xs font-bold ${badgeColor}">${data.status}</span></td>
+                    <td class="p-4 text-center">
+                        <button onclick="bukaFile('${data.fileData}')" class="px-3 py-1 bg-slate-900 text-white rounded text-xs font-medium hover:bg-slate-800 transition cursor-pointer">Lihat Bukti</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Fungsi membuka file di jendela/tab baru untuk guru
+        function bukaFile(base64Data) {
+            const win = window.open();
+            win.document.write(`<iframe src="${base64Data}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
+        }
+
+        // Fungsi pembantu menghapus semua rekaman data di browser (juga dilindungi kata sandi)
+        function hapusSemuaData() {
+            const konfirmasiSandi = prompt("Masukkan kata sandi guru untuk melakukan reset data:");
+            if (konfirmasiSandi === KATA_SANDI_GURU) {
+                if (confirm("Apakah Anda benar-benar yakin ingin menghapus seluruh data presensi? Tindakan ini tidak dapat dibatalkan.")) {
+                    localStorage.removeItem('presensi_tkj');
+                    tampilkanRekap();
+                    alert("Seluruh rekap data presensi telah dibersihkan.");
+                }
+            } else if (konfirmasiSandi !== null) {
+                alert("Kata sandi salah! Data gagal direset.");
+            }
+        }
+    </script>
+</body>
+</html>
