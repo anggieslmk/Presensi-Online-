@@ -100,7 +100,7 @@
         </section>
 
         <script>
-            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxfLPPejiQbA3_YeKJCT1gO8clog50sYKr4NIC5U4pNE_34EeJDjjsPLNWC3pwv2Iv6/exec";
+            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWCJlrkPMRGgSkz4T098nmEIjsaCbykKEHHbdtcZMcpdGukkOiIWTmsapF-l49Yt2X/exec";
             const KATA_SANDI_GURU = "gurutkj1";
 
             function aksesGuru() {
@@ -139,7 +139,7 @@
 
                     fetch(WEB_APP_URL, {
                         method: 'POST',
-                        mode: 'cors',
+                        mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dataKirim)
                     })
