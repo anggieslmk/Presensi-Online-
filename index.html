@@ -99,6 +99,7 @@
             </form>
         </section>
 
+        <!-- Tambahkan URL Web App dari Google Apps Script di sini -->
         <script>
             const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWCJlrkPMRGgSkz4T098nmEIjsaCbykKEHHbdtcZMcpdGukkOiIWTmsapF-l49Yt2X/exec";
             const KATA_SANDI_GURU = "gurutkj1";
@@ -106,7 +107,7 @@
             function aksesGuru() {
                 const inputSandi = prompt("Masukkan kata sandi guru:");
                 if (inputSandi === KATA_SANDI_GURU) {
-                    alert("Akses diberikan. Silakan lihat rekap langsung di Google Drive Anda.");
+                    alert("Akses diberikan. Karena Anda menggunakan Google Sheets, silakan lihat rekap langsung di Google Drive Anda.");
                 } else if (inputSandi !== null) {
                     alert("Kata sandi salah!");
                 }
@@ -143,12 +144,6 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dataKirim)
                     })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
                     .then(() => {
                         alert('Presensi berhasil dikirim!');
                         document.getElementById('form-presensi').reset();
@@ -164,6 +159,17 @@
                 };
                 
                 reader.readAsDataURL(fileInput);
+            }
+
+            function switchTab(tab) {
+                const tabSiswa = document.getElementById('tab-siswa');
+                const btnSiswa = document.getElementById('btn-tab-siswa');
+                
+                if (tab === 'siswa') {
+                    tabSiswa.classList.remove('hidden');
+                } else {
+                    tabSiswa.classList.add('hidden');
+                }
             }
         </script>
     </main>
