@@ -99,15 +99,14 @@
             </form>
         </section>
 
-        <!-- Tambahkan URL Web App dari Google Apps Script di sini -->
         <script>
-            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz5FKLrWqtQtHH9i0io1x7m67s0auuLPJH_ao1WpGA7cgx05VcWmw_1AiSid7V2RfoF/exec";
+            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxfLPPejiQbA3_YeKJCT1gO8clog50sYKr4NIC5U4pNE_34EeJDjjsPLNWC3pwv2Iv6/exec";
             const KATA_SANDI_GURU = "gurutkj1";
 
             function aksesGuru() {
                 const inputSandi = prompt("Masukkan kata sandi guru:");
                 if (inputSandi === KATA_SANDI_GURU) {
-                    alert("Akses diberikan. Karena Anda menggunakan Google Sheets, silakan lihat rekap langsung di Google Drive Anda.");
+                    alert("Akses diberikan. Silakan lihat rekap langsung di Google Drive Anda.");
                 } else if (inputSandi !== null) {
                     alert("Kata sandi salah!");
                 }
@@ -140,9 +139,15 @@
 
                     fetch(WEB_APP_URL, {
                         method: 'POST',
-                        mode: 'no-cors',
+                        mode: 'cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dataKirim)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
                     })
                     .then(() => {
                         alert('Presensi berhasil dikirim!');
@@ -159,17 +164,6 @@
                 };
                 
                 reader.readAsDataURL(fileInput);
-            }
-
-            function switchTab(tab) {
-                const tabSiswa = document.getElementById('tab-siswa');
-                const btnSiswa = document.getElementById('btn-tab-siswa');
-                
-                if (tab === 'siswa') {
-                    tabSiswa.classList.remove('hidden');
-                } else {
-                    tabSiswa.classList.add('hidden');
-                }
             }
         </script>
     </main>
